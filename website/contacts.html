@@ -1,189 +1,105 @@
+
 <!DOCTYPE html>
 <html>
-
 <head>
 
-    <title>Contacts</title>
-	
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
-	<link href = "signin.css" rel="stylesheet">
-	<link href = "contacts.css" rel="stylesheet">
 
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $.ajax({
-          url: 'contactService.asmx/getContacts',
-          method: 'post',
-          dataType: 'json',
-          success: function(data) {
-           $('#myTableData').dataTable({
-            data: data
-            columns: [
-              {'data' : 'UserID'},
-              {'data' : 'FirstName'},
-              {'data' : 'LastName'},
-              {'data' : 'PhoneNumber'},
-              {'data' : 'Email'},
-              {'data' : 'ContactID'}
-            ]
-           });
-          }
-        });
-      });
-    </script>
+    <!-- Bootstrap CSS -->
+	<link href="contacts.css" rel="stylesheet">
+	<!-- <link href="signin.css" rel="stylesheet"> -->
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src='script.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+	
+    <title>Contacts</title>
+
 
 </head>
 
-
-<body onload="load()">
-<<<<<<< HEAD
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
-    <div class="container">  
+<body onload="getContacts()">
+  
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler01" aria-controls="navbarTogglerDemo01" aria-expanded="true" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse show" id="navbarToggler01" style="">
+    <a class="navbar-brand" href="#">Manage Bandage</a>
 	
-        <a class="navbar-brand" href="#">Manage Bandage</a> 
-		
-        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
-            &#9776;
-        </button>
-		
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		<li class="nav-item active">
+			<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+		</li>
+    </ul>
+	
 
-        <div class="collapse navbar-collapse" id="exCollapsingNavbar">
-		
-            <ul class="nav navbar-nav flex-row  ml-auto">
-			
-                <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
-				
-				 <li class="dropdown order-1">
-				 
-                    <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Sign Up<span class="caret"></span></button>
-                    
-					<ul class="dropdown-menu dropdown-menu-right mt-2">
-					
-                       <li class="px-2 py-2">
-					   
-                           <form class="form" role="form">
-						   
-                                <div class="form-group">
-                                    <input id="emailInput" placeholder="Email" class="form-control form-control-sm" type="text" required="">
-                                </div>
-								
-                                <div class="form-group">
-                                    <input id="passwordInput" placeholder="Password" class="form-control form-control-sm" type="text" required="">
-                                </div>
-								
-								<div class="form-group">
-                                    <input id="passwordInput" placeholder="Confirm Password" class="form-control form-control-sm" type="text" required="">
-                                </div>
-								
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-                                </div>
-
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-				
-                <li class="dropdown order-2">
-				
-                    <button type="button" id="dropdownMenu2" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login <span class="caret"></span></button>
-                    
-					<ul class="dropdown-menu dropdown-menu-right mt-2">
-                       
-					   <li class="px-3 py-2">
-					   
-                           <form class="form" role="form">
-						   
-                                <div class="form-group">
-                                    <input id="inputUsername" placeholder="Email" class="form-control form-control-sm" type="text" required="">
-                                </div>
-
-                                <div class="form-group">
-                                    <input id="inputPassword" placeholder="Password" class="form-control form-control-sm" type="text" required="">
-                                </div>
-								
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block" onClick="doLogin()">Login</button>	
-                                </div>
-								
-                            </form>
-							
-                        </li>
-                    </ul>
-                </li>
-				
-            </ul>
-        </div>
-		
-    </div>
-    </div>
+    <div id="container">
+		<div id="search">
+			<form class="form-inline my-2 my-lg-0" role="form">
+				<input type="text" class="form-control mr-sm-2" id="searchBox" placeholder="Search Contacts" onkeypress="filterRows()">
+			</form>
+		</div>
+	</div>
+	
+		<ul class="ml-auto my-2 my-lg-0 ">
+		<li class="dropdown">
+			<button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle" aria-expanded="false">Add Contact <span class="caret"></span></button>
+			<ul class="dropdown-menu dropdown-menu-right mt-2">
+				<li class="px-3 py-2">
+					<form class="form" role="form">
+						<div class="form-group">
+							<input id="First Name" placeholder="First Name" class="form-control form-control-sm" type="text" required="">
+						</div>
+						<div class="form-group">
+							<input id="Last Name" placeholder="Last Name" class="form-control form-control-sm" type="text" required="">
+						</div>
+						<div class="form-group">
+							<input id="Phone Number" placeholder="Phone Number" class="form-control form-control-sm" type="text" required="">
+						</div>
+						<div class="form-group">
+							<input id="Email Address" placeholder="Email Address" class="form-control form-control-sm" type="text" required="">
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary btn-block" id="add" value="Add" onclick="addContact()">Create Contact</button>
+						</div>
+					</form>
+				</li>
+			</ul>
+		</li>
+	</ul>
+  </div>
+  </div>
 </nav>
 
-<div id="container">
-<div class="input-group-prepend">
-  <div id="search">
-    <form class="form-inline" role="form">
-      <label for="Search" class="mb-2 mr-sm-2">Search Contacts:</label>
-      <input type="text" class="form-control mb-2 mr-sm-2" id="Search" placeholder="Search">
-    <button type="button" class="btn btn-primary mb-2">Submit</button>
-    </form>
-  </div>
-</div>
-<!--
-<table class="table">
-    <tr>
-        <td><input type="text" id="First Name"  placeholder="First Name">
-        <input type="text" id="Last Name"  placeholder="Last Name">
-        <input type="text" id="Phone Number"  placeholder="Phone Number">
-        <input type="text" id="Email Address"  placeholder="Email Address">
-        <input type="button" id="add" value="Add" onclick="Javascript:addRow()"></td>
-    </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-</table>
--->
-<form class="form-signin">
-<div class="form-group">
-  <label for = "Credentials">Credentials</label>
-  <input type="text" class="form-control" id="First Name" placeholder="First Name" name="First Name">
-</div>
-<div class="form-group">
-  <input type="text" class="form-control" id="Last Name" placeholder="Last Name" name="Last Name">
-</div>
-    <div class="form-group">
-  <input type="text" class="form-control" id="Email Address" placeholder="Email Address" name="Email Address">
-</div>
 
-<button type="submit" class="btn btn-primary" id="add" value="Add" onclick="Javascript:addRow()">Submit</button>
-</form>
-<div id="mydata">
-<b>Searched stuff</b>
-<table class="table" id="myTableData"  border="1">
+<div id="contacts">
+
+<table class="table" id="contactsData"  border="4">
+  <thead>
     <tr>
-        <td>ID</td>
-        <td>First Name</td>
-        <td>Last Name</td>
-        <td>Phone Number</td>
-        <td>Email Address</td>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+        <th>Email Address</th>
+        <th>Delete?</th>
     </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
 </table>
 &nbsp;<br/>
+</div>
+<!-- <button btype="button" class="btn btn-primary" id="View" value="View" onclick="getContacts()">View Contacts</button> -->
+<div id="div1">
 </div>
 </div> <!--End containter-->
 
 </body>
-
-<script type="text/javascript" src="app.js"></script>
-<script type="text/javascript" src="data.js"></script>
-<script src="jquery-1.11.2.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"</script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"</script>
-<script src='script.js'></script>
-
 
 </html>

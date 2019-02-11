@@ -21,3 +21,7 @@ The roles are as follows:
 - Database Design/Implementation: David & Courtney
 - API Development: Isaac & Lucas
 - Testing, Requirements, and Documentation: Lucy
+
+
+### notes
+Using [this](https://www.youtube.com/watch?v=TgD24a9gxXw) as reference on getting data from database to website using jQuery

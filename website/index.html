@@ -15,7 +15,7 @@
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
-    
+    <script src='script.js'></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -29,18 +29,17 @@
 
     <div class="container">
 
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
+      <form id="loginContainer" class="form-signin">
+        <h2 id= "formHeader" class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Username</label>
         <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="reset" onClick="doLogin()">Sign in</button>
+        <button id="loginBtn" class="btn btn-lg btn-primary btn-block" type="reset" onClick="doLogin()">Sign in</button>
+        <button id="firstTime" class="btn btn-lg btn-primary btn-block" type="reset" onClick="switchLogin()">First time user?</button>
       </form>
       <span id="loginResult"></span>
     </div> <!-- /container -->
-	
-	
+
   </body>
-  <script src='script.js'></script>
 </html>
